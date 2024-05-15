@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Download directories vars
-root_dl="k400"
-root_dl_targz="k400_targz"
+root_dl="data/kinetics400"
+root_dl_targz="data/kinetics400/targz"
 
 # Make root directories
 [ ! -d $root_dl ] && mkdir $root_dl
@@ -14,7 +14,8 @@ curr_extract=$root_dl/train
 tar_list=$(ls $curr_dl)
 for f in $tar_list
 do
-	[[ $f == *.tar.gz ]] && echo Extracting $curr_dl/$f to $curr_extract && tar zxf $curr_dl/$f -C $curr_extract
+	f_stem="${f%%.*}"
+	[[ $f == *.tar.gz ]] && mkdir -p $curr_extract/$f_stem && echo Extracting $curr_dl/$f to $curr_extract/$f_stem && tar zxf $curr_dl/$f -C $curr_extract/$f_stem
 done
 
 # Extract validation
@@ -24,7 +25,8 @@ curr_extract=$root_dl/val
 tar_list=$(ls $curr_dl)
 for f in $tar_list
 do
-	[[ $f == *.tar.gz ]] && echo Extracting $curr_dl/$f to $curr_extract && tar zxf $curr_dl/$f -C $curr_extract
+	f_stem="${f%%.*}"
+	[[ $f == *.tar.gz ]] && mkdir -p $curr_extract/$f_stem && echo Extracting $curr_dl/$f to $curr_extract && tar zxf $curr_dl/$f -C $curr_extract
 done
 
 # Extract test
@@ -34,7 +36,8 @@ curr_extract=$root_dl/test
 tar_list=$(ls $curr_dl)
 for f in $tar_list
 do
-	[[ $f == *.tar.gz ]] && echo Extracting $curr_dl/$f to $curr_extract && tar zxf $curr_dl/$f -C $curr_extract
+	f_stem="${f%%.*}"
+	[[ $f == *.tar.gz ]] && mkdir -p $curr_extract/$f_stem && echo Extracting $curr_dl/$f to $curr_extract && tar zxf $curr_dl/$f -C $curr_extract
 done
 
 # Extract replacement
@@ -44,7 +47,7 @@ curr_extract=$root_dl/replacement
 tar_list=$(ls $curr_dl)
 for f in $tar_list
 do
-	[[ $f == *.tgz ]] && echo Extracting $curr_dl/$f to $curr_extract && tar zxf $curr_dl/$f -C $curr_extract
+	[[ $f == *.tgz ]] && mkdir -p $curr_extract/$f_stem && echo Extracting $curr_dl/$f to $curr_extract && tar zxf $curr_dl/$f -C $curr_extract
 done
 
 # Extraction complete

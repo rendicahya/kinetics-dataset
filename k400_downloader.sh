@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Download directories vars
-root_dl="k400"
-root_dl_targz="k400_targz"
+root_dl="data/kinetics400"
+root_dl_targz="data/kinetics400/targz"
 
 # Make root directories
 [ ! -d $root_dl ] && mkdir $root_dl
